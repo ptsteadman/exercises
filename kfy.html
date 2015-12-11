@@ -1,0 +1,40 @@
+<!doctype html>
+<head>
+<title>Lab Rankings Calculator</title>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+	function knuthFisherYates(array){
+		var i = array.length - 1;
+		while(i > 0){
+			var r = Math.floor(Math.random() * array.length);
+			var t = array[r];
+			array[r] = array[i];
+			array[i] = t;
+			i--; 
+		}
+		return array;
+	}
+
+	var squad = ["@SbarroChica", 
+				 "@ptsteadman", 
+				 "@versacejs", 
+				 "@henry",
+				 "@COMETHRUGIRL",
+				 "@eliath_",
+				 "@davidisaaclee"];
+
+	var output = "UPDATED LAB RANKINGS: <br>";
+	knuthFisherYates(squad).forEach(function(member, i){
+		output += i + 1 + ". " + member + "<br>";
+	});
+
+	var rankings = document.getElementById("rankings");
+	rankings.innerHTML = output;
+
+})
+</script>
+</head>
+<body>
+<div id="rankings"></div>
+</body>
+</html>
