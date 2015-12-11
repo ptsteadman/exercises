@@ -3,16 +3,15 @@
 <title>Lab Rankings Calculator</title>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-	function knuthFisherYates(array){
-		var i = array.length - 1;
-		while(i > 0){
-			var r = Math.floor(Math.random() * array.length);
-			var t = array[r];
-			array[r] = array[i];
-			array[i] = t;
-			i--; 
+	function knuthFisherYates(myArray){
+		var m = myArray.length;
+		while(m > 0){
+			var r = Math.floor(Math.random() * m--);
+			var tmp = myArray[r];
+			myArray[r] = myArray[m];
+			myArray[m] = tmp;
 		}
-		return array;
+		return myArray;
 	}
 
 	var squad = ["@SbarroChica", 
