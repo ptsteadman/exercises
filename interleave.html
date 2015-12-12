@@ -3,12 +3,6 @@
 <script>
 document.addEventListener('DOMContentLoaded', function(){
 
-  var first = ['P','A','T','R','I','C','K'];
-  for(var i = 0; i < first.length; i++){
-    first[i] = "<span class='red'>" + first[i];
-    first[i] = first[i] + "</span>";
-  }
-  var second = ['S','T','E','A','D','M','A','N'];
 
 
   // amounts to a dfs of all possibilities
@@ -32,15 +26,34 @@ document.addEventListener('DOMContentLoaded', function(){
     return results;
   }
 
-  var results = allInterleavings(first, second);
+  var interleave = document.getElementById("interleave");
+  var interval;
 
 
-  i = 0;
-  setInterval(function(){
-    document.getElementById("name").innerHTML = results[i].join("");
-    i++;
-  }, 50);
+  interleave.addEventListener("click", function(){
+    clearInterval(interval);
+    var first = document.getElementById("string1").value.split("");
+    var second = document.getElementById("string2").value.split("");
+    var speed = parseInt(document.getElementById("speed").value);
+
+    for(var i = 0; i < first.length; i++){
+      first[i] = "<span class='red'>" + first[i];
+      first[i] = first[i] + "</span>";
+    }
+
+    var results = allInterleavings(first, second);
+
+
+    var i = 0;
+    interval = setInterval(function(){
+      if(i < results.length){
+	document.getElementById("interleaved").innerHTML = results[i].join("");
+	i++;
+      }
+    }, speed);
+  });
 });
+
 </script>
 </head>
 <style>
@@ -54,5 +67,9 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
 </style>
-<h1 id="name"></h1>
+<input type="text" id="string1" value="INTERLEAVE">
+<input type="text" id="string2" value="STRINGS">
+<input type="text" id="speed" value="200">
+<input type="submit" value="Interleave" id="interleave">
+<h1 id="interleaved"></h1>
 </html>
