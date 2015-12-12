@@ -1,0 +1,58 @@
+<html>
+<head>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+
+  var first = ['P','A','T','R','I','C','K'];
+  for(var i = 0; i < first.length; i++){
+    first[i] = "<span class='red'>" + first[i];
+    first[i] = first[i] + "</span>";
+  }
+  var second = ['S','T','E','A','D','M','A','N'];
+
+
+  // amounts to a dfs of all possibilities
+  function allInterleavings(first, second){
+    var results = [];
+    allInterleavingsRec(0, 0, 0, []);
+
+    function allInterleavingsRec(firstIndex, secondIndex, position, prefix){
+      if(firstIndex == first.length && secondIndex == second.length){
+	results.push(prefix.slice());
+      }
+      if(firstIndex < first.length){
+	prefix[position] = first[firstIndex];
+	allInterleavingsRec(firstIndex + 1, secondIndex, position + 1, prefix);
+      }
+      if(secondIndex < second.length){
+	prefix[position] = second[secondIndex];
+	allInterleavingsRec(firstIndex, secondIndex + 1, position + 1, prefix);
+      }
+    }
+    return results;
+  }
+
+  var results = allInterleavings(first, second);
+
+
+  i = 0;
+  setInterval(function(){
+    document.getElementById("name").innerHTML = results[i].join("");
+    i++;
+  }, 50);
+});
+</script>
+</head>
+<style>
+  h1{
+    height: 200px;
+    margin: 0 auto;
+    font-size: 100px;
+  }
+  .red {
+    color: red;
+  }
+
+</style>
+<h1 id="name"></h1>
+</html>
